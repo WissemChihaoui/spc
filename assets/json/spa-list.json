@@ -1,0 +1,13 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "David Grand Spa - Villerest",
+            "email": "email@example.com",
+            "phone": "+216 20 202 020",
+            "avatar": "1.png",
+            "adress": "123, street name, city",
+            "date": "5/28/2020"
+        }
+    ]
+}
