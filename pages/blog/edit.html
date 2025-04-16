@@ -55,8 +55,9 @@
       rel="stylesheet"
       href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
     />
-    <link rel="stylesheet" href="/assets/vendor/libs/dropzone/dropzone.css" />
-
+    <link rel="stylesheet" href="/assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/quill/editor.css" />
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -198,151 +199,78 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="d-flex w-100 justify-content-between align-items-center">
-                  <h4 class="py-3 mb-4">Petite annonce</h4>
-                    <a class="btn btn-primary" href="/pages/annonce/add.html">Ajouter</a>
-              </div>
-              <div class="row mb-5">
-                <div class="col-md-6">
-                  <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img class="card-img card-img-left" src="../../assets/img/elements/9.jpg" alt="Card image" />
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                            This is a wider card with supporting text below as a natural lead-in to additional content.
-                            This content is a little bit longer.
-                          </p>
-                          <b class="card-text">50€</b>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div class="card mb-4">
+                <div
+                  class="card-header d-flex justify-content-between align-items-center"
+                >
+                  <h5 class="mb-0">Modifier un article du blog</h5>
                 </div>
-                <div class="col-md-6">
-                  <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img class="card-img card-img-left" src="../../assets/img/elements/9.jpg" alt="Card image" />
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                            This is a wider card with supporting text below as a natural lead-in to additional content.
-                            This content is a little bit longer.
+                <div class="card-body">
+                  <form class="row">
+                    <div class="mb-3 col-md-6">
+                      <label class="form-label" for="add-blog-title"
+                        >Titre</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="add-blog-title"
+                        placeholder=""
+                        value="Titre de blog"
+                      />
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label class="form-label" for="add-blog-category"
+                        >Catégorie</label
+                      >
+                      <select
+                        id="add-blog-category"
+                        name="add-blog-category"
+                        class="select2 form-select"
+                        aria-label=""
+                      >
+                        <option selected value="2">Catégorie</option>
+                        <option value="1">Catégorie 1</option>
+                        <option value="2" selected>Catégorie 2</option>
+                        <option value="3">Catégorie 3</option>
+                      </select>
+                    </div>
+                    <div class="mb-3 col-12">
+                      <label class="form-label" for="add-blog-image"
+                        >Image de mis en avant</label
+                      >
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="add-blog-image"
+                        placeholder=""
+                      />
+                    </div>
+                    <div class="col-12 mb-3">
+                      <div class="card-body">
+                        <label class="form-label" for="add-blog-category"
+                        >Description</label
+                      >
+                        <div id="full-editor">
+                          <h6>Quill Rich Text Editor</h6>
+                          <p>
+                            Cupcake ipsum dolor sit amet. Halvah cheesecake
+                            chocolate bar gummi bears cupcake. Pie macaroon bear
+                            claw. Soufflé I love candy canes I love cotton candy
+                            I love.
                           </p>
-                          <b class="card-text">50€</b>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img class="card-img card-img-left" src="../../assets/img/elements/9.jpg" alt="Card image" />
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                            This is a wider card with supporting text below as a natural lead-in to additional content.
-                            This content is a little bit longer.
-                          </p>
-                          <b class="card-text">50€</b>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    <button type="submit" class="btn btn-primary w-auto">
+                      Envoyer
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
             <!-- / Content -->
             <div class="content-backdrop fade"></div>
-            <div class="modal fade" id="addBlog" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
-                  <div class="modal-content p-3 p-md-5">
-                    <div class="modal-body">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      <div class="text-center mb-4">
-                        <h3 class="mb-2">Ajouter Blog</h3>
-                        <p class="text-muted">Créer un article de blog</p>
-                      </div>
-                      <form id="addBlogForm" action="/upload" class="row g-3" onsubmit="return false">
-                        <div class="col-12">
-                          <label class="form-label w-100" for="modalAddCard">Titre</label>
-                          <input type="text" class="form-control" placeholder="Titre">
-                        </div>
-                        <div class="col-12">
-                            <div class="dropzone needsclick" id="dropzone-basic">
-                                <div class="dz-message needsclick">
-                                  Drop files here or click to upload
-                                  <span class="note needsclick"
-                                    >(This is just a demo dropzone. Selected files are
-                                    <span class="fw-medium">not</span> actually uploaded.)</span
-                                  >
-                                </div>
-                                <div class="fallback">
-                                  <input name="file" type="file" />
-                                </div>
-                              </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                          <label class="form-label" for="modalAddCardExpiryDate">Exp. Date</label>
-                          <input
-                            type="text"
-                            id="modalAddCardExpiryDate"
-                            class="form-control expiry-date-mask"
-                            placeholder="MM/YY" />
-                        </div>
-                        <div class="col-6 col-md-3">
-                          <label class="form-label" for="modalAddCardCvv">CVV Code</label>
-                          <div class="input-group input-group-merge">
-                            <input
-                              type="text"
-                              id="modalAddCardCvv"
-                              class="form-control cvv-code-mask"
-                              maxlength="3"
-                              placeholder="654" />
-                            <span class="input-group-text cursor-pointer" id="modalAddCardCvv2"
-                              ><i
-                                class="text-muted ti ti-help"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title="Card Verification Value"></i
-                            ></span>
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <label class="switch">
-                            <input type="checkbox" class="switch-input" />
-                            <span class="switch-toggle-slider">
-                              <span class="switch-on"></span>
-                              <span class="switch-off"></span>
-                            </span>
-                            <span class="switch-label">Save card for future billing?</span>
-                          </label>
-                        </div>
-                        <div class="col-12 text-center">
-                          <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                          <button
-                            type="reset"
-                            class="btn btn-label-secondary btn-reset"
-                            data-bs-dismiss="modal"
-                            aria-label="Close">
-                            Cancel
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
           </div>
           <!-- Content wrapper -->
         </div>
@@ -373,15 +301,13 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="/assets/vendor/libs/block-ui/block-ui.js"></script>
-    <script src="/assets/vendor/libs/dropzone/dropzone.js"></script>
-
+    <script src="/assets/vendor/libs/quill/katex.js"></script>
+    <script src="/assets/vendor/libs/quill/quill.js"></script>
+    <script src="/assets/vendor/libs/select2/select2.js"></script>
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="/assets/js/cards-actions.js"></script>
     <script src="/assets/js/add-blog.js"></script>
-
   </body>
 </html>
