@@ -17,10 +17,8 @@
 
     <title>SPC</title>
 
-    <meta
-      name="description"
-      content="SPC, SPA & Prestige Collection, CRM de TriosWeb"
-    />
+        <meta name="description" content="SPC, SPA & Prestige Collection, CRM de TriosWeb" />
+
 
     <!-- Favicon -->
     <link
@@ -47,22 +45,25 @@
     <link rel="stylesheet" href="/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link
-      rel="stylesheet"
-      href="/assets/vendor/libs/node-waves/node-waves.css"
-    />
-    <link
-      rel="stylesheet"
-      href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
-    />
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="/assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
     <link rel="stylesheet" href="/assets/vendor/libs/select2/select2.css" />
-
+    <link rel="stylesheet" href="/assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/quill/typography.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/quill/editor.css" />
+    
     <!-- Page CSS -->
 
     <!-- Helpers -->
     <script src="/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <script src="/assets/vendor/js/template-customizer.js"></script>
+      <script src="/assets/vendor/js/template-customizer.js"></script>
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/assets/js/config.js"></script>
@@ -80,7 +81,7 @@
         >
           <div class="app-brand demo">
             <a href="/index.html" class="app-brand-link">
-              <img src="/assets/img/SPC-logo-nom-gris.png" width="200" />
+              <img src="/assets/img/SPC-logo-nom-gris.png" width="120" />
             </a>
 
             <a
@@ -198,74 +199,68 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="card mb-4">
-                <div
-                  class="card-header d-flex justify-content-between align-items-center"
-                >
-                  <h5 class="mb-0">Ajouter un article du blog</h5>
-                </div>
-                <div class="card-body">
-                  <form class="row">
-                    <div class="mb-3 col-md-6">
-                      <label class="form-label" for="add-blog-title"
-                        >Titre</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="add-blog-title"
-                        placeholder=""
-                      />
-                    </div>
-                    <div class="mb-3 col-md-6">
-                      <label class="form-label" for="add-blog-category"
-                        >Catégorie</label
-                      >
-                      <select
-                        id="add-blog-category"
-                        name="add-blog-category"
-                        class="select2 form-select"
-                        aria-label=""
-                      >
-                        <option selected>Catégorie</option>
-                        <option value="1">Catégorie 1</option>
-                        <option value="2">Catégorie 2</option>
-                        <option value="3">Catégorie 3</option>
-                      </select>
-                    </div>
-                    <div class="mb-3 col-12">
-                      <label class="form-label" for="add-blog-image"
-                        >Image de mis en avant</label
-                      >
-                      <input
-                        type="file"
-                        class="form-control"
-                        id="add-blog-image"
-                        placeholder=""
-                      />
-                    </div>
-                    <div class="col-12 mb-3">
-                      <div class="card-body">
-                        <label class="form-label" for="add-blog-category"
-                        >Description</label
-                      >
-                        <div id="full-editor">
-                          <h6>Quill Rich Text Editor</h6>
-                          <p>
-                            Cupcake ipsum dolor sit amet. Halvah cheesecake
-                            chocolate bar gummi bears cupcake. Pie macaroon bear
-                            claw. Soufflé I love candy canes I love cotton candy
-                            I love.
-                          </p>
-                        </div>
+                <div class="app-ecommerce-category">
+                    <!-- Category List Table -->
+                    <div class="card">
+                      <div class="card-datatable table-responsive">
+                        <table class="datatables-category-list table border-top">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th></th>
+                              <th>Nom</th>
+                              <th class="text-nowrap text-sm-end">Total</th>
+                              <th class="text-lg-center">Actions</th>
+                            </tr>
+                          </thead>
+                        </table>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary w-auto">
-                      Envoyer
-                    </button>
-                  </form>
-                </div>
-              </div>
+                    <!-- Offcanvas to add new customer -->
+                    <div
+                      class="offcanvas offcanvas-end"
+                      tabindex="-1"
+                      id="offcanvasEcommerceCategoryList"
+                      aria-labelledby="offcanvasEcommerceCategoryListLabel">
+                      <!-- Offcanvas Header -->
+                      <div class="offcanvas-header py-4">
+                        <h5 id="offcanvasEcommerceCategoryListLabel" class="offcanvas-title">Ajouter marques partenaire</h5>
+                        <button
+                          type="button"
+                          class="btn-close bg-label-secondary text-reset"
+                          data-bs-dismiss="offcanvas"
+                          aria-label="Close"></button>
+                      </div>
+                      <!-- Offcanvas Body -->
+                      <div class="offcanvas-body border-top">
+                        <form class="pt-0" id="eCommerceCategoryListForm" onsubmit="return true">
+                          <!-- Title -->
+                          <div class="mb-3">
+                            <label class="form-label" for="ecommerce-category-title">Nom</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="ecommerce-category-title"
+                              placeholder="Nom de marque"
+                              name="categoryTitle"
+                              aria-label="Nom de marque" />
+                          </div>
+                         
+                          <!-- Image -->
+                          <div class="mb-3">
+                            <label for="add-service-image" class="form-label">Image</label>
+                            <input type="file" class="form-control" />
+                          </div>
+                         
+                          <!-- Submit and reset -->
+                          <div class="mb-3">
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Ajouter </button>
+                            <button type="reset" class="btn bg-label-danger" data-bs-dismiss="offcanvas">Annuler</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
             </div>
             <!-- / Content -->
             <div class="content-backdrop fade"></div>
@@ -296,15 +291,23 @@
     <script src="/assets/vendor/js/menu.js"></script>
     <script src="/menu-handler.js"></script>
 
+
     <!-- endbuild -->
-
-    <!-- Vendors JS -->
-
+    <script src="/assets/vendor/libs/moment/moment.js"></script>
+    <script src="/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="/assets/vendor/libs/select2/select2.js"></script>
+    <script src="/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
+    <script src="/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
+    <script src="/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
+    <script src="/assets/vendor/libs/quill/katex.js"></script>
+    <script src="/assets/vendor/libs/quill/quill.js"></script>
+
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="/assets/js/add-blog.js"></script>
+    <script src="/assets/js/marque-partenaire.js"></script>
+
+    <!-- Page JS -->
   </body>
 </html>

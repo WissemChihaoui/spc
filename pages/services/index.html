@@ -208,7 +208,6 @@
                               <th></th>
                               <th></th>
                               <th>Nom</th>
-                              <th class="text-nowrap "> SLUG</th>
                               <th class="text-nowrap text-sm-end">Total</th>
                               <th class="text-lg-center">Actions</th>
                             </tr>
@@ -245,40 +244,13 @@
                               name="categoryTitle"
                               aria-label="Nom de service ou équipements" />
                           </div>
-                          <!-- Slug -->
-                          <div class="mb-3">
-                            <label class="form-label" for="ecommerce-category-slug">Slug</label>
-                            <input
-                              type="text"
-                              id="ecommerce-category-slug"
-                              class="form-control"
-                              placeholder="Slug de service ou équipements"
-                              aria-label="slug"
-                              name="slug" />
-                          </div>
+                         
                           <!-- Image -->
-                          
-                          <!-- Description -->
                           <div class="mb-3">
-                            <label class="form-label">Description</label>
-                            <div class="form-control p-0 py-1">
-                              <div class="comment-editor border-0" id="ecommerce-category-description"></div>
-                              <div class="comment-toolbar border-0">
-                                <div class="d-flex justify-content-end">
-                                  <span class="ql-formats me-0">
-                                    <button class="ql-bold"></button>
-                                    <button class="ql-italic"></button>
-                                    <button class="ql-underline"></button>
-                                    <button class="ql-list" value="ordered"></button>
-                                    <button class="ql-list" value="bullet"></button>
-                                    <button class="ql-link"></button>
-                                    <button class="ql-image"></button>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
+                            <label for="add-service-image" class="form-label">Image</label>
+                            <input type="file" class="form-control" />
                           </div>
-                          
+                         
                           <!-- Submit and reset -->
                           <div class="mb-3">
                             <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Ajouter </button>

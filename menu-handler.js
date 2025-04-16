@@ -29,6 +29,11 @@ const menuData = [
           href: '/pages/services/index.html',
         },
         {
+          label: 'Marques partenaire',
+          icon: 'ti ti-package',
+          href: '/pages/marques/index.html',
+        },
+        {
           label: 'Types d\'établissement',
           icon: 'ti ti-building',
           href: '/pages/types/index.html',

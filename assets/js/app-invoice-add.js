@@ -4,7 +4,178 @@
 
 "use strict";
 
-(function () {
+$(function () {
+  const serviceTypesEl = document.querySelector("#serviceTypes"),
+        marquePartenaireEL = document.querySelector("#marquePartenaire");
+
+  function tagTemplate(tagData) {
+    return `
+      <tag title="${tagData.label}"
+        contenteditable='false'
+        spellcheck='false'
+        tabIndex="-1"
+        class="${
+          this.settings.classNames.tag
+        } ${tagData.class ? tagData.class : ""}"
+        ${this.getAttributes(tagData)}
+      >
+        <x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>
+        <div>
+          <div style='border-radius: 0%' class='tagify__tag__avatar-wrap'>
+            <img onerror="this.style.visibility='hidden'" src="${
+              tagData.icon || ""
+            }">
+          </div>
+          <span class='tagify__tag-text'>${tagData.label || tagData.name}</span>
+        </div>
+      </tag>
+    `;
+  }
+
+  function suggestionItemTemplate(tagData) {
+    return `
+      <div ${this.getAttributes(tagData)}
+        class='tagify__dropdown__item align-items-center ${
+          tagData.class ? tagData.class : ""
+        }'
+        tabindex="0"
+        role="option"
+      >
+        ${
+          tagData.icon
+            ? `<div style='border-radius: 0%' class='tagify__dropdown__item__avatar-wrap'>
+                <img onerror="this.style.visibility='hidden'" src="${tagData.icon}">
+              </div>`
+            : ""
+        }
+        <div class="fw-medium">${tagData.label || tagData.name}</div>
+      </div>
+    `;
+  }
+
+  function dropdownHeaderTemplate(suggestions) {
+    return `
+      <div class="${
+        this.settings.classNames.dropdownItem
+      } ${this.settings.classNames.dropdownItem}__addAll">
+        <strong>${
+          this.value.length ? "Ajouter le reste" : "Ajouter tous"
+        }</strong>
+        <span>${
+          suggestions.length
+        } ${suggestions.length === 1 ? "équipement" : "équipements"}</span>
+      </div>
+    `;
+  }
+
+  const whitelistIcons = [
+    {
+      value: 1,
+      label: "Sauna",
+      icon: "/assets/img/spa-icons/sauna.png",
+    },
+    {
+      value: 2,
+      label: "Piscine",
+      icon: "/assets/img/spa-icons/pool.png",
+    },
+    {
+      value: 3,
+      label: "Hammam",
+      icon: "/assets/img/spa-icons/drops.png",
+    },
+  ];
+
+
+  let TagifyUserList = new Tagify(serviceTypesEl, {
+    tagTextProp: "name", // very important since a custom template is used with this property as text. allows typing a "value" or a "name" to match input with whitelist
+    enforceWhitelist: true,
+    skipInvalid: true, // do not remporarily add invalid tags
+    dropdown: {
+      closeOnSelect: false,
+      enabled: 0,
+      classname: "users-list",
+      searchKeys: ["label"], // very important to set by which keys to search for suggesttions when typing
+    },
+    templates: {
+      tag: tagTemplate,
+      dropdownItem: suggestionItemTemplate,
+      dropdownHeader: dropdownHeaderTemplate,
+    },
+    whitelist: whitelistIcons,
+  });
+
+  // attach events listeners
+  TagifyUserList.on("dropdown:select", onSelectSuggestion) // allows selecting all the suggested (whitelist) items
+    .on("edit:start", onEditStart); // show custom text in the tag while in edit-mode
+
+  function onSelectSuggestion(e) {
+    // custom class from "dropdownHeaderTemplate"
+    if (
+      e.detail.elm.classList.contains(
+        `${TagifyUserList.settings.classNames.dropdownItem}__addAll`
+      )
+    )
+      TagifyUserList.dropdown.selectAll();
+  }
+
+  function onEditStart({ detail: { tag, data } }) {
+    TagifyUserList.setTagTextNode(tag, `${data.name} `);
+  }
+const whitelistPartners = [
+  {
+    value: 1,
+    label: "L'Oréal",
+    icon: "/assets/img/spa-icons/drops.png",
+  },
+  {
+    value: 2,
+    label: "Yves Rocher",
+    icon: "/assets/img/spa-icons/drops.png",
+  },
+  {
+    value: 3,
+    label: "Nuxe",
+    icon: "/assets/img/spa-icons/drops.png",
+  },
+];
+  let TagifyPartnerList = new Tagify(marquePartenaireEL, {
+    tagTextProp: "name",
+    enforceWhitelist: true,
+    skipInvalid: true,
+    dropdown: {
+      closeOnSelect: false,
+      enabled: 0,
+      classname: "users-list",
+      searchKeys: ["label"],
+    },
+    templates: {
+      tag: tagTemplate,
+      dropdownItem: suggestionItemTemplate,
+      dropdownHeader: dropdownHeaderTemplate,
+    },
+    whitelist: whitelistPartners, // or use a different list like `whitelistPartners`
+  });
+  
+  // attach events listeners
+  TagifyPartnerList.on("dropdown:select", onSelectSuggestionPartner)
+                   .on("edit:start", onEditStartPartner);
+  
+  function onSelectSuggestionPartner(e) {
+    if (
+      e.detail.elm.classList.contains(
+        `${TagifyPartnerList.settings.classNames.dropdownItem}__addAll`
+      )
+    )
+      TagifyPartnerList.dropdown.selectAll();
+  }
+  
+  function onEditStartPartner({ detail: { tag, data } }) {
+    TagifyPartnerList.setTagTextNode(tag, `${data.name} `);
+  }
+});
+
+$(function () {
   const previewTemplate = `<div class="dz-preview dz-file-preview">
 <div class="dz-details">
   <div class="dz-thumbnail">
@@ -41,7 +212,8 @@
       locale: "fr"
     });
   }
-})(function () {
+})
+$(function () {
   const invoiceItemPriceList = document.querySelectorAll(".invoice-item-price"),
     invoiceItemQtyList = document.querySelectorAll(".invoice-item-qty"),
     invoiceDateList = document.querySelectorAll(".date-picker");
@@ -147,122 +319,7 @@ $(function () {
   });
 });
 
-$(function () {
-  const serviceTypesEl = document.querySelector("#serviceTypes");
 
-  function tagTemplate(tagData) {
-    return `
-      <tag title="${tagData.label}"
-        contenteditable='false'
-        spellcheck='false'
-        tabIndex="-1"
-        class="${
-          this.settings.classNames.tag
-        } ${tagData.class ? tagData.class : ""}"
-        ${this.getAttributes(tagData)}
-      >
-        <x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>
-        <div>
-          <div style='border-radius: 0%' class='tagify__tag__avatar-wrap'>
-            <img onerror="this.style.visibility='hidden'" src="${
-              tagData.icon || ""
-            }">
-          </div>
-          <span class='tagify__tag-text'>${tagData.label || tagData.name}</span>
-        </div>
-      </tag>
-    `;
-  }
-
-  function suggestionItemTemplate(tagData) {
-    return `
-      <div ${this.getAttributes(tagData)}
-        class='tagify__dropdown__item align-items-center ${
-          tagData.class ? tagData.class : ""
-        }'
-        tabindex="0"
-        role="option"
-      >
-        ${
-          tagData.icon
-            ? `<div style='border-radius: 0%' class='tagify__dropdown__item__avatar-wrap'>
-                <img onerror="this.style.visibility='hidden'" src="${tagData.icon}">
-              </div>`
-            : ""
-        }
-        <div class="fw-medium">${tagData.label || tagData.name}</div>
-      </div>
-    `;
-  }
-
-  function dropdownHeaderTemplate(suggestions) {
-    return `
-      <div class="${
-        this.settings.classNames.dropdownItem
-      } ${this.settings.classNames.dropdownItem}__addAll">
-        <strong>${
-          this.value.length ? "Ajouter le reste" : "Ajouter tous"
-        }</strong>
-        <span>${
-          suggestions.length
-        } ${suggestions.length === 1 ? "équipement" : "équipements"}</span>
-      </div>
-    `;
-  }
-
-  const whitelistIcons = [
-    {
-      value: 1,
-      label: "Sauna",
-      icon: "/assets/img/spa-icons/sauna.png",
-    },
-    {
-      value: 2,
-      label: "Piscine",
-      icon: "/assets/img/spa-icons/pool.png",
-    },
-    {
-      value: 3,
-      label: "Hammam",
-      icon: "/assets/img/spa-icons/drops.png",
-    },
-  ];
-  let TagifyUserList = new Tagify(serviceTypesEl, {
-    tagTextProp: "name", // very important since a custom template is used with this property as text. allows typing a "value" or a "name" to match input with whitelist
-    enforceWhitelist: true,
-    skipInvalid: true, // do not remporarily add invalid tags
-    dropdown: {
-      closeOnSelect: false,
-      enabled: 0,
-      classname: "users-list",
-      searchKeys: ["label"], // very important to set by which keys to search for suggesttions when typing
-    },
-    templates: {
-      tag: tagTemplate,
-      dropdownItem: suggestionItemTemplate,
-      dropdownHeader: dropdownHeaderTemplate,
-    },
-    whitelist: whitelistIcons,
-  });
-
-  // attach events listeners
-  TagifyUserList.on("dropdown:select", onSelectSuggestion) // allows selecting all the suggested (whitelist) items
-    .on("edit:start", onEditStart); // show custom text in the tag while in edit-mode
-
-  function onSelectSuggestion(e) {
-    // custom class from "dropdownHeaderTemplate"
-    if (
-      e.detail.elm.classList.contains(
-        `${TagifyUserList.settings.classNames.dropdownItem}__addAll`
-      )
-    )
-      TagifyUserList.dropdown.selectAll();
-  }
-
-  function onEditStart({ detail: { tag, data } }) {
-    TagifyUserList.setTagTextNode(tag, `${data.name} `);
-  }
-});
 
 $(document).ready(function () {
   $("#partenaireForm").repeater({

@@ -54,6 +54,9 @@
       href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
     />
     <link rel="stylesheet" href="/assets/vendor/libs/dropzone/dropzone.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/flatpickr/flatpickr.css" />
+
+    <link rel="stylesheet" href="/assets/vendor/libs/tagify/tagify.css" />
 
     <!-- Page CSS -->
 
@@ -310,6 +313,115 @@
                       </div>
                     </div>
                   </div>
+                  <div class="card mb-4">
+                    <h5 class="card-header mb-0">Responsable du spa</h5>
+                    <div class="card-body">
+                      <form class="source-item px-0 px-sm-4">
+                        <div class="mb-3" data-repeater-list="partenaires">
+                          <div
+                            class="repeater-wrapper pt-0 pt-md-4"
+                            data-repeater-item
+                          >
+                            <div
+                              class="d-flex border rounded position-relative pe-0"
+                            >
+                              <div class="row w-100 p-3">
+                                <!-- Image -->
+                                <div class="col-12 mb-md-0 mb-3">
+                                  <label
+                                    class="w-100 cursor-pointer position-relative"
+                                  >
+                                    <img
+                                      src="/assets/img/placeholder.png"
+                                      alt="Preview"
+                                      class="d-block rounded mb-2 w-100 preview-img"
+                                    />
+                                    <input
+                                      type="file"
+                                      name="image"
+                                      class="account-file-input"
+                                      hidden
+                                      accept="image/png, image/jpeg"
+                                    />
+                                  </label>
+                                </div>
+
+                                <!-- Name and Role -->
+                                <div class="col-12">
+                                  <div class="row">
+                                    <div class="col-12 mb-3">
+                                      <label class="form-label">Nom</label>
+                                      <input
+                                        type="text"
+                                        name="nom"
+                                        class="form-control"
+                                        placeholder="Nom du partenaire"
+                                      />
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                      <label class="form-label">Poste</label>
+                                      <input
+                                        type="text"
+                                        name="poste"
+                                        class="form-control"
+                                        placeholder="Poste occupé"
+                                      />
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                      <label class="form-label"
+                                        >Description</label
+                                      >
+                                      <textarea
+                                        name="description"
+                                        class="form-control"
+                                        rows="2"
+                                        placeholder="Brève description..."
+                                      ></textarea>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- Actions -->
+                              <div
+                                class="d-flex flex-column align-items-center justify-content-between border-start p-2"
+                              >
+                                <i
+                                  class="ti ti-x cursor-pointer"
+                                  data-repeater-delete
+                                ></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Add Button -->
+                        <div class="row pb-4">
+                          <div class="col-12">
+                            <button
+                              type="button"
+                              class="btn btn-primary"
+                              data-repeater-create
+                            >
+                              Ajouter une marque partenaire
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="card mb-4">
+                    <div class="card-header mb-0">Marque Partenaire</div>
+                    <div class="card-body">
+                      <input
+                        id="marquePartenaire"
+                        name="marquePartenaire"
+                        class="form-control"
+                        placeholder="Choisir les équipements"
+                        value="Piscine"
+                      />
+                    </div>
+                  </div>
                 </div>
 
                 <div class="col-xl-8 col-lg-7 col-md-7">
@@ -429,24 +541,24 @@
     <script src="/assets/vendor/libs/node-waves/node-waves.js"></script>
     <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="/assets/vendor/libs/hammer/hammer.js"></script>
-    <script src="/assets/vendor/libs/i18n/i18n.js"></script>
     <script src="/assets/vendor/libs/typeahead-js/typeahead.js"></script>
     <script src="/assets/vendor/js/menu.js"></script>
     <script src="/menu-handler.js"></script>
-
 
     <!-- endbuild -->
 
     <!-- Vendors JS -->
     <script src="/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
     <script src="/assets/vendor/libs/cleavejs/cleave.js"></script>
     <script src="/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
     <script src="/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
     <script src="/assets/vendor/libs/dropzone/dropzone.js"></script>
-    <script src="/assets/vendor/libs/flatpickr/flatpickr.js"></script>
     <script src="/assets/vendor/libs/cleavejs/cleave.js"></script>
     <script src="/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
     <script src="/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+    <script src="/assets/vendor/libs/tagify/tagify.js"></script>
+
 
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>

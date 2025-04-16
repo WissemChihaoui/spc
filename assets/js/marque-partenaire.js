@@ -169,12 +169,12 @@ $(function () {
       language: {
         sLengthMenu: '_MENU_',
         search: '',
-        searchPlaceholder: 'Rechercher Service ou équipement'
+        searchPlaceholder: 'Rechercher Marque partenaire'
       },
       // Button for offcanvas
       buttons: [
         {
-          text: '<i class="ti ti-plus ti-xs me-0 me-sm-2"></i><span class="d-none d-sm-inline-block">Ajouter service</span>',
+          text: '<i class="ti ti-plus ti-xs me-0 me-sm-2"></i><span class="d-none d-sm-inline-block">Ajouter marque</span>',
           className: 'add-new btn btn-primary ms-2',
           attr: {
             'data-bs-toggle': 'offcanvas',
