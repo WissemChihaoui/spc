@@ -44,22 +44,25 @@
     <link rel="stylesheet" href="/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link
-      rel="stylesheet"
-      href="/assets/vendor/libs/node-waves/node-waves.css"
-    />
-    <link
-      rel="stylesheet"
-      href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
-    />
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="/assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
     <link rel="stylesheet" href="/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
     <link rel="stylesheet" href="/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/quill/typography.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/quill/editor.css" />
     <!-- Page CSS -->
 
     <!-- Helpers -->
     <script src="/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+      <script src="/assets/vendor/js/template-customizer.js"></script>
+
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/assets/js/config.js"></script>
   </head>
@@ -106,7 +109,7 @@
                 <div data-i18n="SPA">SPA</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="/pages/spa/index.html" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-map-2"></i>
                     <div data-i18n="Dashboard">Liste des spa</div>
@@ -125,7 +128,7 @@
                     <div data-i18n="Dashboard">Région ou ville</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item active">
                   <a href="/pages/services/index.html" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-package"></i>
                     <div data-i18n="Dashboard">Services et équipements</div>
@@ -271,23 +274,96 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-                <!-- DataTable with Buttons -->
-                <div class="card">
-                  <div class="card-datatable table-responsive">
-                    <table class="datatables-category-list table border-top">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th></th>
-                          <th>Spa</th>
-                          <th class="text-nowrap">Téléphone &nbsp;</th>
-                          <th class="text-nowrap text-sm-end">Adresse</th>
-                          <th class="text-lg-center">Actions</th>
-                        </tr>
-                      </thead>
-                    </table>
+                <div class="app-ecommerce-category">
+                    <!-- Category List Table -->
+                    <div class="card">
+                      <div class="card-datatable table-responsive">
+                        <table class="datatables-category-list table border-top">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th></th>
+                              <th>Nom</th>
+                              <th class="text-nowrap "> SLUG</th>
+                              <th class="text-nowrap text-sm-end">Total</th>
+                              <th class="text-lg-center">Actions</th>
+                            </tr>
+                          </thead>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- Offcanvas to add new customer -->
+                    <div
+                      class="offcanvas offcanvas-end"
+                      tabindex="-1"
+                      id="offcanvasEcommerceCategoryList"
+                      aria-labelledby="offcanvasEcommerceCategoryListLabel">
+                      <!-- Offcanvas Header -->
+                      <div class="offcanvas-header py-4">
+                        <h5 id="offcanvasEcommerceCategoryListLabel" class="offcanvas-title">Ajouter Services et équipements</h5>
+                        <button
+                          type="button"
+                          class="btn-close bg-label-secondary text-reset"
+                          data-bs-dismiss="offcanvas"
+                          aria-label="Close"></button>
+                      </div>
+                      <!-- Offcanvas Body -->
+                      <div class="offcanvas-body border-top">
+                        <form class="pt-0" id="eCommerceCategoryListForm" onsubmit="return true">
+                          <!-- Title -->
+                          <div class="mb-3">
+                            <label class="form-label" for="ecommerce-category-title">Nom</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="ecommerce-category-title"
+                              placeholder="Nom de service ou équipements"
+                              name="categoryTitle"
+                              aria-label="Nom de service ou équipements" />
+                          </div>
+                          <!-- Slug -->
+                          <div class="mb-3">
+                            <label class="form-label" for="ecommerce-category-slug">Slug</label>
+                            <input
+                              type="text"
+                              id="ecommerce-category-slug"
+                              class="form-control"
+                              placeholder="Slug de service ou équipements"
+                              aria-label="slug"
+                              name="slug" />
+                          </div>
+                          <!-- Image -->
+                          
+                          <!-- Description -->
+                          <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <div class="form-control p-0 py-1">
+                              <div class="comment-editor border-0" id="ecommerce-category-description"></div>
+                              <div class="comment-toolbar border-0">
+                                <div class="d-flex justify-content-end">
+                                  <span class="ql-formats me-0">
+                                    <button class="ql-bold"></button>
+                                    <button class="ql-italic"></button>
+                                    <button class="ql-underline"></button>
+                                    <button class="ql-list" value="ordered"></button>
+                                    <button class="ql-list" value="bullet"></button>
+                                    <button class="ql-link"></button>
+                                    <button class="ql-image"></button>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <!-- Submit and reset -->
+                          <div class="mb-3">
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Ajouter </button>
+                            <button type="reset" class="btn bg-label-danger" data-bs-dismiss="offcanvas">Annuler</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
                   </div>
-                </div>
             </div>
             <!-- / Content -->
             <div class="content-backdrop fade"></div>
@@ -314,21 +390,25 @@
     <script src="/assets/vendor/libs/node-waves/node-waves.js"></script>
     <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="/assets/vendor/libs/hammer/hammer.js"></script>
-    <script src="/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
 
     <script src="/assets/vendor/js/menu.js"></script>
 
     <!-- endbuild -->
-
-    <!-- Vendors JS -->
+    <script src="/assets/vendor/libs/moment/moment.js"></script>
     <script src="/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+    <script src="/assets/vendor/libs/select2/select2.js"></script>
+    <script src="/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
+    <script src="/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
+    <script src="/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
+    <script src="/assets/vendor/libs/quill/katex.js"></script>
+    <script src="/assets/vendor/libs/quill/quill.js"></script>
 
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>
 
     <!-- Page JS -->
-     <script src="/assets/js/spa-liste.js"></script>
-    <script src="/assets/js/app-ecommerce-category-list.js"></script>
+    <script src="/assets/js/spa-service-eq.js"></script>
 
+    <!-- Page JS -->
   </body>
 </html>

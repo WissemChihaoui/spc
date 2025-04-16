@@ -1,0 +1,11 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Corps",
+            "description": "d-flex align-items-sm-center jus",
+            "slug":"corps",
+            "total-spa": ["1", "2", "4", "5"]
+        }
+    ]
+}

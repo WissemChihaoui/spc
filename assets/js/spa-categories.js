@@ -13,7 +13,7 @@ if (commentEditor) {
     modules: {
       toolbar: '.comment-toolbar'
     },
-    placeholder: 'Enter category description...',
+    placeholder: 'Description du catégorie...',
     theme: 'snow'
   });
 }
@@ -34,8 +34,7 @@ $(function () {
   }
 
   // Variable declaration for category list table
-  var dt_category_list_table = $('.datatables-category-list'),
-      spaAdd = 'add.html'
+  var dt_category_list_table = $('.datatables-category-list');
 
   //select2 for dropdowns in offcanvas
 
@@ -54,14 +53,14 @@ $(function () {
 
   if (dt_category_list_table.length) {
     var dt_category = dt_category_list_table.DataTable({
-      ajax: assetsPath + 'json/spa-list.json', // JSON file to add data
+    ajax: assetsPath + 'json/categories.json', // JSON file to add data
       columns: [
         // columns according to JSON
         { data: '' },
         { data: 'id' },
         { data: 'name' },
-        { data: 'phone' },
-        { data: 'adress' },
+        { data: 'slug' },
+        { data: 'total-spa' },
         { data: '' }
       ],
       columnDefs: [
@@ -96,20 +95,9 @@ $(function () {
           responsivePriority: 2,
           render: function (data, type, full, meta) {
             var $name = full['name'],
-              $email = full['email'],
-              $image = full['cat_image'],
+              $description = full['description'],
               $id = full['id'];
-            if ($image) {
-              // For Product image
-              var $output =
-                '<img src="' +
-                assetsPath +
-                'img/ecommerce-images/' +
-                $image +
-                '" alt="Product-' +
-                $id +
-                '" class="rounded-2">';
-            } else {
+           
               // For Product badge
               var stateNum = Math.floor(Math.random() * 6);
               var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
@@ -117,23 +105,18 @@ $(function () {
                 $name = full['name'],
                 $initials = $name.match(/\b\w/g) || [];
               $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-              $output = '<span class="avatar-initial rounded-2 bg-label-' + $state + '">' + $initials + '</span>';
-            }
+            
             // Creates full output for Categories and Category Detail
             var $row_output =
               '<div class="d-flex align-items-center">' +
-              '<div class="avatar-wrapper me-2 rounded-2 bg-label-secondary">' +
-              '<div class="avatar">' +
-              $output +
-              '</div>' +
-              '</div>' +
+              
               '<div class="d-flex flex-column justify-content-center">' +
-              '<a href="/pages/spa/view.html?id='+$id+'" class="text-body text-wrap fw-medium">' +
+              '<a href="javascript:void(0);" class="text-body text-wrap fw-medium">' +
               $name +
               '</a>' +
-              '<a href="mailto:'+$email+'" class="text-muted text-truncate mb-0 d-none d-sm-block"><small>' +
-              $email +
-              '</small></a>' +
+              '<span class="text-muted text-truncate mb-0 d-none d-sm-block"><small>' +
+              $description +
+              '</small></span>' +
               '</div>' +
               '</div>';
             return $row_output;
@@ -144,8 +127,8 @@ $(function () {
           targets: 3,
           responsivePriority: 3,
           render: function (data, type, full, meta) {
-            var $phone = full['phone'];
-            return '<a href="tel:'+$phone+'" class="text-end">' + $phone + '</a>';
+            var $slug = full['slug'];
+            return '<span class="label label-success">' + $slug + '</span>';
           }
         },
         {
@@ -153,8 +136,8 @@ $(function () {
           targets: 4,
           orderable: false,
           render: function (data, type, full, meta) {
-            var $adress = full['adress'];
-            return "<div class='h6 mb-0 text-sm-end'>" + $adress + '</div';
+            var $totalSpa = full['total-spa'];
+            return "<div class='h6 mb-0 text-sm-end'>" + $totalSpa.length + '</div';
           }
         },
         {
@@ -185,30 +168,18 @@ $(function () {
         '>',
       lengthMenu: [7, 10, 20, 50, 70, 100], //for length of menu
       language: {
-        sLengthMenu: 'Afficher _MENU_ entrées',
-        sZeroRecords: 'Aucun enregistrement trouvé',
-        sInfo: 'Affichage de _START_ à _END_ sur _TOTAL_ entrées',
-        sInfoEmpty: 'Affichage de 0 à 0 sur 0 entrées',
-        sInfoFiltered: '(filtré de _MAX_ entrées au total)',
-        sSearch: '',
-        searchPlaceholder: 'Rechercher un spa',
-        oPaginate: {
-          sFirst: 'Premier',
-          sLast: 'Dernier',
-          sNext: 'Suivant',
-          sPrevious: 'Précédent'
-        },
-        sLoadingRecords: 'Chargement...',
-        sProcessing: 'Traitement...',
-        sEmptyTable: 'Aucune donnée disponible dans le tableau'
+        sLengthMenu: '_MENU_',
+        search: '',
+        searchPlaceholder: 'Rechercher Catégorie'
       },
       // Button for offcanvas
       buttons: [
         {
-          text: '<i class="ti ti-plus ti-xs me-0 me-sm-2"></i><span class="d-none d-sm-inline-block">Ajouter Spa</span>',
+          text: '<i class="ti ti-plus ti-xs me-0 me-sm-2"></i><span class="d-none d-sm-inline-block">Ajouter catégorie</span>',
           className: 'add-new btn btn-primary ms-2',
-          action: function () {
-            window.location.href = spaAdd;
+          attr: {
+            'data-bs-toggle': 'offcanvas',
+            'data-bs-target': '#offcanvasEcommerceCategoryList'
           }
         }
       ],

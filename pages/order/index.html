@@ -42,6 +42,8 @@
     <link rel="stylesheet" href="/assets/vendor/css/rtl/core.css" />
     <link rel="stylesheet" href="/assets/vendor/css/rtl/theme-default.css" />
     <link rel="stylesheet" href="/assets/css/demo.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/select2/select2.css" />
+
 
     <!-- Vendors CSS -->
     <link
@@ -52,14 +54,14 @@
       rel="stylesheet"
       href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
     />
-    <link rel="stylesheet" href="/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
-    <link rel="stylesheet" href="/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
-    <link rel="stylesheet" href="/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
+
     <!-- Page CSS -->
 
     <!-- Helpers -->
     <script src="/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <script src="/assets/vendor/js/template-customizer.js"></script>
+
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/assets/js/config.js"></script>
   </head>
@@ -100,19 +102,19 @@
                 <div>Tableau du board</div>
               </a>
             </li>
-            <li class="menu-item active open">
+            <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-armchair-2"></i>
                 <div data-i18n="SPA">SPA</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="/pages/spa/index.html" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-map-2"></i>
                     <div data-i18n="Dashboard">Liste des spa</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item open">
                   <a href="/pages/categories/index.html" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-box"></i>
                     <div data-i18n="Dashboard">Catégories</div>
@@ -163,7 +165,7 @@
                 <div>Emploi/CVthèque</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="/pages/order/index.html" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-arrows-sort"></i>
                 <div>Ordre de spa</div>
@@ -271,23 +273,123 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-                <!-- DataTable with Buttons -->
-                <div class="card">
-                  <div class="card-datatable table-responsive">
-                    <table class="datatables-category-list table border-top">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th></th>
-                          <th>Spa</th>
-                          <th class="text-nowrap">Téléphone &nbsp;</th>
-                          <th class="text-nowrap text-sm-end">Adresse</th>
-                          <th class="text-lg-center">Actions</th>
-                        </tr>
-                      </thead>
-                    </table>
+              <div class="row" id="sortable-4">
+                
+                <div class="col-md-6 col-xl-4">
+                  <div class="card mb-3">
+                    <div class="card-header cursor-move">Spa d'ordre 1</div>
+                    <div class="card-body">
+                      <select
+                        id="order-1"
+                        class="select2 form-select"
+                        data-placeholder="Choisir un spa"
+                      >
+                        <option value="">Choisir un spa</option>
+                        <option value="SPA 1">SPA 1</option>
+                        <option value="SPA 2">SPA 2</option>
+                        <option value="SPA 3">SPA 3</option>
+                        <option value="SPA 4">SPA 4</option>
+                        <option value="SPA 5">SPA 5</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
+                <div class="col-md-6 col-xl-4">
+                  <div class="card mb-3">
+                    <div class="card-header cursor-move">Spa d'ordre 2</div>
+                    <div class="card-body">
+                      <select
+                        id="order-2"
+                        class="select2 form-select"
+                        data-placeholder="Choisir un spa"
+                      >
+                        <option value="">Choisir un spa</option>
+                        <option value="SPA 1">SPA 1</option>
+                        <option value="SPA 2">SPA 2</option>
+                        <option value="SPA 3">SPA 3</option>
+                        <option value="SPA 4">SPA 4</option>
+                        <option value="SPA 5">SPA 5</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                  <div class="card mb-3">
+                    <div class="card-header cursor-move">Spa d'ordre 3</div>
+                    <div class="card-body">
+                      <select
+                        id="order-3"
+                        class="select2 form-select"
+                        data-placeholder="Choisir un spa"
+                      >
+                        <option value="">Choisir un spa</option>
+                        <option value="SPA 1">SPA 1</option>
+                        <option value="SPA 2">SPA 2</option>
+                        <option value="SPA 3">SPA 3</option>
+                        <option value="SPA 4">SPA 4</option>
+                        <option value="SPA 5">SPA 5</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                  <div class="card mb-3">
+                    <div class="card-header cursor-move">Spa d'ordre 4</div>
+                    <div class="card-body">
+                      <select
+                        id="order-4"
+                        class="select2 form-select"
+                        data-placeholder="Choisir un spa"
+                      >
+                        <option value="">Choisir un spa</option>
+                        <option value="SPA 1">SPA 1</option>
+                        <option value="SPA 2">SPA 2</option>
+                        <option value="SPA 3">SPA 3</option>
+                        <option value="SPA 4">SPA 4</option>
+                        <option value="SPA 5">SPA 5</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                  <div class="card mb-3">
+                    <div class="card-header cursor-move">Spa d'ordre 5</div>
+                    <div class="card-body">
+                      <select
+                        id="order-5"
+                        class="select2 form-select"
+                        data-placeholder="Choisir un spa"
+                      >
+                        <option value="">Choisir un spa</option>
+                        <option value="SPA 1">SPA 1</option>
+                        <option value="SPA 2">SPA 2</option>
+                        <option value="SPA 3">SPA 3</option>
+                        <option value="SPA 4">SPA 4</option>
+                        <option value="SPA 5">SPA 5</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                  <div class="card mb-3">
+                    <div class="card-header cursor-move">Spa d'ordre 6</div>
+                    <div class="card-body">
+                      <select
+                        id="order-6"
+                        class="select2 form-select"
+                        data-placeholder="Choisir un spa"
+                      >
+                        <option value="">Choisir un spa</option>
+                        <option value="SPA 1">SPA 1</option>
+                        <option value="SPA 2">SPA 2</option>
+                        <option value="SPA 3">SPA 3</option>
+                        <option value="SPA 4">SPA 4</option>
+                        <option value="SPA 5">SPA 5</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- / Content -->
             <div class="content-backdrop fade"></div>
@@ -314,21 +416,44 @@
     <script src="/assets/vendor/libs/node-waves/node-waves.js"></script>
     <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="/assets/vendor/libs/hammer/hammer.js"></script>
-    <script src="/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
 
     <script src="/assets/vendor/js/menu.js"></script>
 
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+
+    <script src="/assets/vendor/libs/block-ui/block-ui.js"></script>
+    <script src="/assets/vendor/libs/sortablejs/sortable.js"></script>
+    <script src="/assets/vendor/libs/select2/select2.js"></script>
+    <script src="/assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
 
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>
 
     <!-- Page JS -->
-     <script src="/assets/js/spa-liste.js"></script>
-    <script src="/assets/js/app-ecommerce-category-list.js"></script>
+    <script>
+      $(function () {
+        let cardDnD = document.getElementById("sortable-4");
 
+        var select2 = $(".select2");
+        if (select2.length) {
+          select2.each(function () {
+            var $this = $(this);
+            $this.wrap('<div class="position-relative"></div>').select2({
+              dropdownParent: $this.parent(),
+              placeholder: $this.data("placeholder"), //for dynamic placeholder
+            });
+          });
+        }
+
+        if (typeof cardDnD !== undefined && cardDnD !== null) {
+          Sortable.create(cardDnD, {
+            animation: 500,
+            handle: ".card",
+          });
+        }
+      });
+    </script>
   </body>
 </html>
