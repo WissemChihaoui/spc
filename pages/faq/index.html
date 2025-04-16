@@ -17,7 +17,10 @@
 
     <title>SPC</title>
 
-    <meta name="description" content="SPC, SPA & Prestige Collection, CRM de TriosWeb" />
+    <meta
+      name="description"
+      content="SPC, SPA & Prestige Collection, CRM de TriosWeb"
+    />
 
     <!-- Favicon -->
     <link
@@ -52,17 +55,18 @@
       rel="stylesheet"
       href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
     />
-
+    <link rel="stylesheet" href="/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
     <!-- Page CSS -->
 
     <!-- Helpers -->
     <script src="/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-      <script src="/assets/vendor/js/template-customizer.js"></script>
+    <script src="/assets/vendor/js/template-customizer.js"></script>
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/assets/js/config.js"></script>
-
   </head>
 
   <body>
@@ -194,9 +198,54 @@
           <div class="content-wrapper">
             <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y"></div>
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <div class="app-ecommerce-category">
+                <!-- Category List Table -->
+                <div class="card">
+                  <div class="card-datatable table-responsive">
+                    <table class="datatables-faq-list table border-top">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th></th>
+                          <th>Question</th>
+                          <th class="text-nowrap">Réponse</th>
+                          <th class="text-lg-center">Actions</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
             <!-- / Content -->
             <div class="content-backdrop fade"></div>
+            <div class="modal fade" id="addFaqModal" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-simple">
+                <div class="modal-content p-2 p-md-5">
+                  <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!-- Pricing Plans -->
+                    <div class="py-0 rounded-top">
+                      <h5 class="text-center mb-2">Ajouter un question</h5>
+                      <div class="mb-2">
+                        <label for="question" class="form-label">Question</label>
+                        <input type="text" id="question" class="form-control">
+                      </div>
+                      <div class="mb-2">
+                        <label for="question" class="form-label">Réponse</label>
+                        <textarea class="form-control" id="réponse"></textarea>
+                      </div>
+                      
+                    </div>
+                    <!--/ Pricing Plans -->
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-primary">Enregistrer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <!-- Content wrapper -->
         </div>
@@ -224,13 +273,15 @@
     <script src="/assets/vendor/js/menu.js"></script>
     <script src="/menu-handler.js"></script>
 
-
     <!-- endbuild -->
 
     <!-- Vendors JS -->
+    <script src="/assets/vendor/libs/moment/moment.js"></script>
+    <script src="/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
 
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/faq.js"></script>
 
     <!-- Page JS -->
   </body>
