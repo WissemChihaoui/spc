@@ -202,6 +202,15 @@ $(function () {
       addRemoveLinks: true,
     });
   }
+  const dropzoneMulti2 = document.querySelector("#dropzone-multi2");
+  if (dropzoneMulti2) {
+    const myDropzoneMulti = new Dropzone(dropzoneMulti2, {
+      previewTemplate: previewTemplate,
+      parallelUploads: 1,
+      maxFilesize: 5,
+      addRemoveLinks: true,
+    });
+  }
 
   const flatpickrRange = document.querySelector("#flatpickr-range");
 

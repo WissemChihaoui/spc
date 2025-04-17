@@ -195,48 +195,31 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <div
-                class="d-flex w-100 justify-content-between align-items-center"
-              >
-                <h4 class="py-3 mb-4">CV Thèque</h4>
-                <a class="btn btn-primary" href="/pages/jobs/add.html"
-                  >Ajouter une offre</a
-                >
-              </div>
-              <div class="row">
-                <div class="col-sm-6 col-lg-3">
-                  <div class="card p-2 h-100 shadow-none border">
-                    <div class="rounded-2 text-center mb-3">
-                      <a href="javascript:void(0);"
-                        ><img
-                          class="img-fluid"
-                          src="../../assets/img/pages/app-academy-tutor-1.png"
-                          alt="tutor image 1"
-                      /></a>
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">Liste des avis</h5>
+                        <button class="btn btn-primary">Exporter</button>
                     </div>
-                    <div class="card-body p-3 pt-2">
-                      <a href="javascript:void(0);" class="h5">SPA Particienne</a>
-                      <p class="mt-2">Introductory course for Angular and framework basics in web development.</p>
-                      <p class="d-flex align-items-center"><i class="ti ti-calendar me-2 mt-n1"></i>Créer le 17/04/2025</p>
-                      <div class="d-flex flex-column flex-md-row gap-2 text-nowrap">
-                        
-                        <a
-                          class="app-academy-md-50 btn btn-label-primary d-flex align-items-center"
-                          href="javascript:void(0);">
-                          <span class="me-2">Modifier</span
-                          ><i class="ti ti-chevron-right scaleX-n1-rtl ti-sm"></i>
-                        </a>
-                        <a
-                          class="app-academy-md-50 btn btn-label-danger d-flex align-items-center"
-                          href="javascript:void(0);">
-                          <span class="me-2">Supprimer</span
-                          ><i class="ti ti-trash scaleX-n1-rtl ti-sm"></i>
-                        </a>
-                      </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  <th>Date</th>
+                                  <th>Nom et prénom</th>
+                                  <th>Note</th>
+                                  <th>Practicien(ne)</th>
+                                  <th>Accueil</th>
+                                  <th>Vestiares</th>
+                                  <th>Cabine</th>
+                                  <th>Soin</th>
+                                  <th>Détente</th>
+                                  <th>Equipements</th>
+                                  <th>Boutique</th>
+                                </tr>
+                              </thead>
+                        </table>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
             <!-- / Content -->
             <div class="content-backdrop fade"></div>
@@ -265,7 +248,7 @@
     <script src="/assets/vendor/libs/hammer/hammer.js"></script>
 
     <script src="/assets/vendor/js/menu.js"></script>
-    <script src="/menu-handler.js"></script>
+    <script src="/inst-menu-handler.js"></script>
 
 
     <!-- endbuild -->

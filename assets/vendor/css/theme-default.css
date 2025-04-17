@@ -312,17 +312,17 @@ button.list-group-item-primary.active {
 }
 .btn-label-primary:hover {
   border-color: transparent !important;
-  background: #dddbfb !important;
+  background: #fbffd8  !important;
   color: #f5be89 !important;
 }
 .btn-label-primary:focus, .btn-label-primary.focus {
   color: #f5be89;
-  background: #dddbfb;
+  background: #fbffd8 ;
   box-shadow: none !important;
 }
 .btn-label-primary:active, .btn-label-primary.active, .btn-label-primary.show.dropdown-toggle, .show > .btn-label-primary.dropdown-toggle {
   color: #f5be89 !important;
-  background-color: #dddbfb !important;
+  background-color: #fbffd8  !important;
   border-color: transparent !important;
 }
 .btn-label-primary:active:focus, .btn-label-primary.active:focus, .btn-label-primary.show.dropdown-toggle:focus, .show > .btn-label-primary.dropdown-toggle:focus {
@@ -337,13 +337,13 @@ button.list-group-item-primary.active {
 
 .btn-group .btn-label-primary,
 .input-group .btn-label-primary {
-  border-right: var(--bs-border-width) solid #dddbfb;
-  border-left: var(--bs-border-width) solid #dddbfb;
+  border-right: var(--bs-border-width) solid #fbffd8 ;
+  border-left: var(--bs-border-width) solid #fbffd8 ;
 }
 
 .btn-group-vertical .btn-label-primary {
-  border-top-color: #dddbfb;
-  border-bottom-color: #dddbfb;
+  border-top-color: #fbffd8 ;
+  border-bottom-color: #fbffd8 ;
 }
 
 .btn-outline-primary {
@@ -814,7 +814,7 @@ table.dataTable.dtr-column > tbody > tr > th.control:before {
   background: #e9e7fd !important;
 }
 .datepicker table tr td.range.focused, .datepicker table tr td.range.highlighted.focused, .datepicker table tr td.range.today.focused {
-  background: #dddbfb !important;
+  background: #fbffd8  !important;
 }
 .datepicker table tr td.range.disabled, .datepicker table tr td.range.highlighted.disabled, .datepicker table tr td.range.today.disabled {
   background: rgba(233, 231, 253, 0.5) !important;

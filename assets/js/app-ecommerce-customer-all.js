@@ -33,145 +33,75 @@ $(function () {
   // customers datatable
   if (dt_customer_table.length) {
     var dt_customer = dt_customer_table.DataTable({
-      ajax: assetsPath + 'json/ecommerce-customer-all.json', // JSON file to add data
+      ajax: assetsPath + 'json/ecommerce-customer-all.json',
       columns: [
-        // columns according to JSON
-        { data: '' },
-        { data: 'id' },
-        { data: 'customer' },
-        { data: 'customer_id' },
-        { data: 'country' },
-        { data: 'order' },
-        { data: 'total_spent' }
+        { data: null }, // For control/expand (if needed)
+        { data: null }, // For checkbox
+        { data: null }, // For actions
+        { data: 'customer' }, // Client (Name + Email)
+        { data: 'customer_id' }, // Téléphone (You can rename later)
+        { data: 'questionnaire' } // Questionnaire
       ],
       columnDefs: [
         {
-          // For Responsive
           className: 'control',
           searchable: false,
           orderable: false,
-          responsivePriority: 2,
+          responsivePriority: 1,
           targets: 0,
-          render: function (data, type, full, meta) {
-            return '';
-          }
+          render: () => ''
         },
         {
-          // For Checkboxes
           targets: 1,
           orderable: false,
           searchable: false,
-          responsivePriority: 3,
           checkboxes: true,
-          render: function () {
-            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
-          },
+          render: () => '<input type="checkbox" class="dt-checkboxes form-check-input">',
           checkboxes: {
             selectAllRender: '<input type="checkbox" class="form-check-input">'
           }
         },
         {
-          // customer full name and email
           targets: 2,
-          responsivePriority: 1,
-          render: function (data, type, full, meta) {
-            var $name = full['customer'],
-              $email = full['email'],
-              $image = full['image'];
-
-            if ($image) {
-              // For Avatar image
-              var $output =
-                '<img src="' + assetsPath + 'img/avatars/' + $image + '" alt="Avatar" class="rounded-circle">';
-            } else {
-              // For Avatar badge
-              var stateNum = Math.floor(Math.random() * 6);
-              var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
-              var $state = states[stateNum],
-                $name = full['customer'],
-                $initials = $name.match(/\b\w/g) || [];
-              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-              $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
-            }
-            // Creates full output for row
-            var $row_output =
-              '<div class="d-flex justify-content-start align-items-center customer-name">' +
-              '<div class="avatar-wrapper">' +
-              '<div class="avatar me-2">' +
-              $output +
-              '</div>' +
-              '</div>' +
-              '<div class="d-flex flex-column">' +
-              '<a href="' +
-              customerView +
-              '" ><span class="fw-medium">' +
-              $name +
-              '</span></a>' +
-              '<small class="text-muted">' +
-              $email +
-              '</small>' +
-              '</div>' +
-              '</div>';
-            return $row_output;
-          }
+          searchable: false,
+          orderable: false,
+          render: (data, type, full) => `
+            <div class="d-flex align-items-center ">
+              <button class="btn btn-sm btn-icon delete-record me-2"><i class="ti ti-trash"></i></button>
+              <a href="javascript:void(0);" class="btn btn-sm btn-icon"><i class="ti ti-edit"></i></a>
+            </div>
+          `
         },
         {
-          // customer Role
           targets: 3,
-          render: function (data, type, full, meta) {
-            var $id = full['customer_id'];
-
-            return "<span class='h6 mb-0'>#" + $id + '</span>';
+          render: (data, type, full) => {
+            let name = full['customer'],
+                email = full['email'],
+                image = full['image'],
+                avatar = image
+                  ? `<div class="avatar me-2"><img src="${assetsPath}img/avatars/${image}" alt="Avatar" class="rounded-circle"></div>`
+                  : `<span class="rounded-circle bg-label-primary">${(name.match(/\b\w/g) || []).join('').toUpperCase()}</span>`;
+  
+            return `
+              <div class="d-flex align-items-center customer-name">
+                <div class="avatar-wrapper">${avatar}</div>
+                <div class="d-flex flex-column">
+                  <span class="fw-medium">${name}</span>
+                  <small class="text-muted">${email}</small>
+                </div>
+              </div>`;
           }
         },
         {
-          // Plans
           targets: 4,
-          render: function (data, type, full, meta) {
-            var $plan = full['country'];
-            var $code = full['country_code'];
-
-            if ($code) {
-              var $output_code = `<i class ="fis fi fi-${$code} rounded-circle me-2 fs-3"></i>`;
-            } else {
-              // For Avatar badge
-              var $output_code = `<i class ="fis fi fi-xx rounded-circle me-2 fs-3"></i>`;
-            }
-
-            var $row_output =
-              '<div class="d-flex justify-content-start align-items-center customer-country">' +
-              '<div>' +
-              $output_code +
-              '</div>' +
-              '<div>' +
-              '<span>' +
-              $plan +
-              '</span>' +
-              '</div>' +
-              '</div>';
-            return $row_output;
-          }
+          render: (data, type, full) => `<a href="tel:${full['customer_id']}">${full['customer_id']}</a>` // Téléphone
         },
         {
-          // customer Status
           targets: 5,
-          render: function (data, type, full, meta) {
-            var $status = full['order'];
-
-            return '<span>' + $status + '</span>';
-          }
-        },
-        {
-          // customer Spent
-          targets: 6,
-          render: function (data, type, full, meta) {
-            var $spent = full['total_spent'];
-
-            return '<span class="h6 mb-0">' + $spent + '</span>';
-          }
+          render: (data, type, full) => `<span>${full['questionnaire'] || '-'}</span>`
         }
       ],
-      order: [[2, 'desc']],
+      order: [[3, 'asc']],
       dom:
         '<"card-header d-flex flex-wrap pb-md-2"' +
         '<"d-flex align-items-center me-5"f>' +
@@ -181,202 +111,83 @@ $(function () {
         '<"col-sm-12 col-md-6"i>' +
         '<"col-sm-12 col-md-6"p>' +
         '>',
-
-      language: {
-        sLengthMenu: '_MENU_',
-        search: '',
-        searchPlaceholder: 'Search Order'
-      },
-      // Buttons with Dropdown
+        language: {
+          sEmptyTable: "Aucune donnée disponible dans le tableau",
+          sInfo: "Affichage de _START_ à _END_ sur _TOTAL_ entrées",
+          sInfoEmpty: "Affichage de 0 à 0 sur 0 entrées",
+          sInfoFiltered: "(filtré à partir de _MAX_ entrées au total)",
+          sInfoPostFix: "",
+          sInfoThousands: ",",
+          sLengthMenu: "Afficher _MENU_ entrées",
+          sLoadingRecords: "Chargement...",
+          sProcessing: "Traitement...",
+          sSearch: "Rechercher :",
+          sZeroRecords: "Aucun enregistrement correspondant trouvé",
+          oPaginate: {
+            sFirst: "Premier",
+            sLast: "Dernier",
+            sNext: "Suivant",
+            sPrevious: "Précédent"
+          },
+          oAria: {
+            sSortAscending: ": activer pour trier la colonne par ordre croissant",
+            sSortDescending: ": activer pour trier la colonne par ordre décroissant"
+          },
+          buttons: {
+            copy: "Copier",
+            csv: "CSV",
+            excel: "Excel",
+            pdf: "PDF",
+            print: "Imprimer",
+            colvis: "Visibilité des colonnes",
+            collection: "Collection",
+            upload: "Téléverser"
+          }
+        },
       buttons: [
         {
           extend: 'collection',
           className: 'btn btn-label-secondary dropdown-toggle me-3',
-          text: '<i class="ti ti-download me-1"></i>Export',
+          text: '<i class="ti ti-download me-1"></i>Exporter',
           buttons: [
             {
               extend: 'print',
-              text: '<i class="ti ti-printer me-2" ></i>Print',
+              text: '<i class="ti ti-printer me-2"></i>Imprimer',
               className: 'dropdown-item',
-              exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
-                // prevent avatar to be print
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('customer-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              },
-              customize: function (win) {
-                //customize print view for dark
-                $(win.document.body)
-                  .css('color', headingColor)
-                  .css('border-color', borderColor)
-                  .css('background-color', bodyBg);
-                $(win.document.body)
-                  .find('table')
-                  .addClass('compact')
-                  .css('color', 'inherit')
-                  .css('border-color', 'inherit')
-                  .css('background-color', 'inherit');
-              }
+              exportOptions: { columns: [1, 2, 3, 4, 5] }
             },
             {
               extend: 'csv',
-              text: '<i class="ti ti-file me-2" ></i>Csv',
+              text: '<i class="ti ti-file me-2"></i>CSV',
               className: 'dropdown-item',
-              exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('customer-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
+              exportOptions: { columns: [1, 2, 3, 4, 5] }
             },
             {
               extend: 'excel',
               text: '<i class="ti ti-file-export me-2"></i>Excel',
               className: 'dropdown-item',
-              exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('customer-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
+              exportOptions: { columns: [1, 2, 3, 4, 5] }
             },
             {
               extend: 'pdf',
-              text: '<i class="ti ti-file-text me-2"></i>Pdf',
+              text: '<i class="ti ti-file-text me-2"></i>PDF',
               className: 'dropdown-item',
-              exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('customer-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
-            },
-            {
-              extend: 'copy',
-              text: '<i class="ti ti-copy me-2" ></i>Copy',
-              className: 'dropdown-item',
-              exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('customer-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
+              exportOptions: { columns: [1, 2, 3, 4, 5] }
             }
           ]
         },
         {
-          text: '<i class="ti ti-plus me-0 me-sm-1 mb-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add Customer</span>',
-          className: 'add-new btn btn-primary py-2',
+          text: '<i class="ti ti-plus ti-xs me-0 me-sm-2"></i><span class="d-none d-sm-inline-block">Ajouter Client</span>',
+          className: 'add-new btn btn-primary ms-2',
           attr: {
             'data-bs-toggle': 'offcanvas',
-            'data-bs-target': '#offcanvasEcommerceCustomerAdd'
-          }
+            'data-bs-target': '#offCanvasAddClient'
+          },
         }
-      ],
-      // For responsive popup
-      responsive: {
-        details: {
-          display: $.fn.dataTable.Responsive.display.modal({
-            header: function (row) {
-              var data = row.data();
-              return 'Details of ' + data['customer'];
-            }
-          }),
-          type: 'column',
-          renderer: function (api, rowIdx, columns) {
-            var data = $.map(columns, function (col, i) {
-              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                ? '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
-                    col.columnIndex +
-                    '">' +
-                    '<td>' +
-                    col.title +
-                    ':' +
-                    '</td> ' +
-                    '<td>' +
-                    col.data +
-                    '</td>' +
-                    '</tr>'
-                : '';
-            }).join('');
-
-            return data ? $('<table class="table"/><tbody />').append(data) : false;
-          }
-        }
-      }
+      ]
     });
-    $('.dataTables_length').addClass('ms-n2 mt-0 mt-md-3 me-2');
-    $('.dt-action-buttons').addClass('pt-0');
-    $('.dataTables_filter').addClass('ms-n3');
-    $('.dt-buttons').addClass('d-flex flex-wrap');
   }
+  
 
   // Delete Record
   $('.datatables-customers tbody').on('click', '.delete-record', function () {
