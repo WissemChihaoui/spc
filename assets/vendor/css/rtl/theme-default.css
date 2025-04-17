@@ -292,9 +292,9 @@ button.list-group-item-primary.active {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #f5be89;
-  border-color: #f5be89;
+  color: #fff!important;
+  background-color: #f5be89!important;
+  border-color: #f5be89!important;
 }
 .btn-primary:hover {
   color: #fff !important;

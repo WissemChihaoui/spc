@@ -55,7 +55,6 @@
       rel="stylesheet"
       href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
     />
-    <link rel="stylesheet" href="/assets/vendor/libs/dropzone/dropzone.css" />
 
     <!-- Page CSS -->
 
@@ -198,151 +197,107 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="d-flex w-100 justify-content-between align-items-center">
-                  <h4 class="py-3 mb-4">Petite annonce</h4>
-                    <a class="btn btn-primary" href="/pages/annonce/add.html">Ajouter une annonce</a>
-              </div>
-              <div class="row mb-5">
-                <div class="col-md-6">
-                  <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img class="card-img card-img-left" src="../../assets/img/elements/9.jpg" alt="Card image" />
+              <div class="row">
+                  <div class="col-lg-8">
+                    <h4 class="mb-2">How to add product in cart?</h4>
+                    <p>1 minute</p>
+                    <hr class="my-6" />
+                    <p>
+                      If you’re after only one item, simply choose the ‘Buy Now’
+                      option on the item page. This will take you directly to
+                      Checkout.
+                    </p>
+                    <p class="mb-0">
+                      If you want several items, use the ‘Add to Cart’ button and
+                      then choose ‘Keep Browsing’ to continue shopping or ‘Checkout’
+                      to finalise your purchase.
+                    </p>
+                    <div class="my-6">
+                      <img
+                        src="../../assets/img/front-pages/misc/product-image.png"
+                        alt="product"
+                        class="img-fluid w-100"
+                      />
+                    </div>
+                    <p class="mb-0">
+                      You can go back to your cart at any time by clicking on the
+                      shopping cart icon at the top right side of the page.
+                    </p>
+                    <div class="mt-6">
+                      <img
+                        src="../../assets/img/front-pages/misc/checkout-image.png"
+                        alt="product"
+                        class="img-fluid w-100"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="card mb-4">
+                      <div class="card-header">
+                        <h5 class="mb-0">Commentaires</h5>
                       </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                            This is a wider card with supporting text below as a natural lead-in to additional content.
-                            This content is a little bit longer.
-                          </p>
-                          <b class="card-text">50€</b>
+                      <div
+                        class="card-body"
+                        style="max-height: 400px; overflow-y: auto"
+                      >
+                        <!-- Example comment -->
+                        <div class="mb-3">
+                          <div class="d-flex mb-2">
+                            <div class="avatar flex-shrink-0 me-2">
+                              <img
+                                src="/assets/img/avatars/2.png"
+                                alt="User"
+                                class="rounded-circle"
+                                width="40"
+                              />
+                            </div>
+                            <div>
+                              <h6 class="mb-0">Alice</h6>
+                              <small class="text-muted">il y a 5 minutes</small>
+                            </div>
+                          </div>
+                          <p>Merci pour ce tutoriel, très clair !</p>
                         </div>
+                        <!-- Another comment -->
+                        <div class="mb-3">
+                          <div class="d-flex mb-2">
+                            <div class="avatar flex-shrink-0 me-2">
+                              <img
+                                src="/assets/img/avatars/3.png"
+                                alt="User"
+                                class="rounded-circle"
+                                width="40"
+                              />
+                            </div>
+                            <div>
+                              <h6 class="mb-0">Bob</h6>
+                              <small class="text-muted">il y a 10 minutes</small>
+                            </div>
+                          </div>
+                          <p>Est-ce que ce système marche aussi sur mobile ?</p>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                        <form id="reply-form">
+                          <div class="mb-2">
+                            <textarea
+                              class="form-control"
+                              rows="3"
+                              placeholder="Votre commentaire..."
+                              required
+                            ></textarea>
+                          </div>
+                          <button type="submit" class="btn btn-primary w-100">
+                            Répondre
+                          </button>
+                        </form>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img class="card-img card-img-left" src="../../assets/img/elements/9.jpg" alt="Card image" />
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                            This is a wider card with supporting text below as a natural lead-in to additional content.
-                            This content is a little bit longer.
-                          </p>
-                          <b class="card-text">50€</b>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img class="card-img card-img-left" src="../../assets/img/elements/9.jpg" alt="Card image" />
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                            This is a wider card with supporting text below as a natural lead-in to additional content.
-                            This content is a little bit longer.
-                          </p>
-                          <b class="card-text">50€</b>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <!-- / Content -->
             <div class="content-backdrop fade"></div>
-            <div class="modal fade" id="addBlog" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
-                  <div class="modal-content p-3 p-md-5">
-                    <div class="modal-body">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      <div class="text-center mb-4">
-                        <h3 class="mb-2">Ajouter Blog</h3>
-                        <p class="text-muted">Créer un article de blog</p>
-                      </div>
-                      <form id="addBlogForm" action="/upload" class="row g-3" onsubmit="return false">
-                        <div class="col-12">
-                          <label class="form-label w-100" for="modalAddCard">Titre</label>
-                          <input type="text" class="form-control" placeholder="Titre">
-                        </div>
-                        <div class="col-12">
-                            <div class="dropzone needsclick" id="dropzone-basic">
-                                <div class="dz-message needsclick">
-                                  Drop files here or click to upload
-                                  <span class="note needsclick"
-                                    >(This is just a demo dropzone. Selected files are
-                                    <span class="fw-medium">not</span> actually uploaded.)</span
-                                  >
-                                </div>
-                                <div class="fallback">
-                                  <input name="file" type="file" />
-                                </div>
-                              </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                          <label class="form-label" for="modalAddCardExpiryDate">Exp. Date</label>
-                          <input
-                            type="text"
-                            id="modalAddCardExpiryDate"
-                            class="form-control expiry-date-mask"
-                            placeholder="MM/YY" />
-                        </div>
-                        <div class="col-6 col-md-3">
-                          <label class="form-label" for="modalAddCardCvv">CVV Code</label>
-                          <div class="input-group input-group-merge">
-                            <input
-                              type="text"
-                              id="modalAddCardCvv"
-                              class="form-control cvv-code-mask"
-                              maxlength="3"
-                              placeholder="654" />
-                            <span class="input-group-text cursor-pointer" id="modalAddCardCvv2"
-                              ><i
-                                class="text-muted ti ti-help"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title="Card Verification Value"></i
-                            ></span>
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <label class="switch">
-                            <input type="checkbox" class="switch-input" />
-                            <span class="switch-toggle-slider">
-                              <span class="switch-on"></span>
-                              <span class="switch-off"></span>
-                            </span>
-                            <span class="switch-label">Save card for future billing?</span>
-                          </label>
-                        </div>
-                        <div class="col-12 text-center">
-                          <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                          <button
-                            type="reset"
-                            class="btn btn-label-secondary btn-reset"
-                            data-bs-dismiss="modal"
-                            aria-label="Close">
-                            Cancel
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
           </div>
           <!-- Content wrapper -->
         </div>
@@ -373,15 +328,10 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="/assets/vendor/libs/block-ui/block-ui.js"></script>
-    <script src="/assets/vendor/libs/dropzone/dropzone.js"></script>
 
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="/assets/js/cards-actions.js"></script>
-    <script src="/assets/js/add-blog.js"></script>
-
   </body>
 </html>
