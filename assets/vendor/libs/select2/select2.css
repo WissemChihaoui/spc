@@ -133,7 +133,7 @@
 }
 
 .select2-container--default .select2-results__option--highlighted:not([aria-selected=true]) {
-  background-color: rgba(115, 103, 240, 0.08) !important;
+  background-color: rgba(245, 190, 137, 0.08) !important;
   color: #f5be89 !important;
 }
 
@@ -247,7 +247,7 @@
   float: left;
   font-weight: 500;
   color: #f5be89;
-  background-color: rgba(115, 103, 240, 0.16);
+  background-color: rgba(245, 190, 137, 0.16);
 }
 html:not([dir=rtl]) .select2-container--default .select2-selection--multiple .select2-selection__choice {
   padding-right: 1.3rem;

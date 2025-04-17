@@ -62,7 +62,7 @@
 .light-style .twitter-typeahead .tt-suggestion:hover, .light-style .twitter-typeahead .tt-suggestion:focus {
   text-decoration: none;
   color: #f5be89;
-  background-color: rgba(115, 103, 240, 0.08);
+  background-color: rgba(245, 190, 137, 0.08);
 }
 
 .dark-style .twitter-typeahead .tt-menu {
@@ -84,7 +84,7 @@
 .dark-style .twitter-typeahead .tt-menu .tt-suggestion:hover, .dark-style .twitter-typeahead .tt-menu .tt-suggestion:focus {
   text-decoration: none;
   color: #f5be89;
-  background-color: rgba(115, 103, 240, 0.08);
+  background-color: rgba(245, 190, 137, 0.08);
 }
 .dark-style .twitter-typeahead .tt-hint {
   color: #5e6692;
